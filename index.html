@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Diagnóstico SEO RE/MAX Botucatu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&amp;family=Source+Sans+3:wght@400;600&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap">
+<style>
+/* Layout: deck de seções empilhadas (scroll-snap), cada uma um "slide" com eyebrow, título e prova capturada */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#121a2b; --muted:#5a6478; --line:#d9dee7;
+  --navy:#0f2a5c; --bad:#c8102e; --bad-soft:#fde8eb; --good:#16794a; --good-soft:#e3f4ea;
+  --code-bg:#0f1626; --code-fg:#d6deeb; --code-dim:#6b7a99; --code-tag:#7fb4ff; --code-attr:#f2c97d; --code-str:#9be3b0;
+  --serp-title:#1a0dab; --serp-url:#4d5156; --serp-snip:#4d5156;
+  --display:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1220; --surface:#141c2e; --ink:#e8ecf4; --muted:#9aa6bd; --line:#26314a;
+  --navy:#8fb3ff; --bad:#ff5a6e; --bad-soft:#3a1720; --good:#4fd18b; --good-soft:#12301f;
+  --serp-title:#99b8ff; --serp-url:#a7b0c0; --serp-snip:#bdc4d1; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1220; --surface:#141c2e; --ink:#e8ecf4; --muted:#9aa6bd; --line:#26314a;
+  --navy:#8fb3ff; --bad:#ff5a6e; --bad-soft:#3a1720; --good:#4fd18b; --good-soft:#12301f;
+  --serp-title:#99b8ff; --serp-url:#a7b0c0; --serp-snip:#bdc4d1; color-scheme:dark}
+
+html{scroll-snap-type:y proximity; scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.55}
+.slide{min-height:100vh; scroll-snap-align:start; display:flex; align-items:center; border-bottom:1px solid var(--line);
+  padding-block:56px; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+.wrap{width:100%; max-width:1140px; margin:0 auto; display:flex; flex-direction:column; gap:28px}
+.eyebrow{font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); display:flex; gap:12px; align-items:center}
+.eyebrow b{color:var(--navy); font-weight:600}
+h1,h2{font-family:var(--display); text-wrap:balance; margin:0; letter-spacing:-.015em}
+h1{font-size:clamp(34px,5.4vw,64px); line-height:1.04; font-weight:800}
+h2{font-size:clamp(26px,3.4vw,40px); line-height:1.12; font-weight:700}
+.lead{font-size:clamp(17px,1.6vw,20px); color:var(--muted); max-width:62ch; margin:0}
+p{margin:0}
+.note{font-size:14px; color:var(--muted)}
+.bad{color:var(--bad)} .good{color:var(--good)}
+mark.b{background:var(--bad-soft); color:var(--bad); padding:0 .25em; border-radius:3px}
+mark.g{background:var(--good-soft); color:var(--good); padding:0 .25em; border-radius:3px}
+
+/* Capa */
+.cover .wrap{gap:36px}
+.cover h1 span{color:var(--bad)}
+.meta-row{display:flex; flex-wrap:wrap; gap:10px 28px; font-family:var(--mono); font-size:13px; color:var(--muted)}
+.meta-row strong{color:var(--ink); font-weight:600}
+.verdict{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px}
+.verdict div{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px 18px; display:flex; flex-direction:column; gap:4px}
+.verdict .k{font-family:var(--mono); font-size:12px; color:var(--muted)}
+.verdict .v{font-family:var(--display); font-size:22px; font-weight:700}
+
+/* SERP */
+.serp{background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.bar{display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line); font-family:var(--mono); font-size:12.5px; color:var(--muted); background:color-mix(in srgb, var(--surface) 85%, var(--line))}
+.dots{display:flex; gap:6px} .dots i{width:10px; height:10px; border-radius:50%; background:var(--line); display:block}
+.bar .addr{flex:1; min-width:0; background:var(--bg); border:1px solid var(--line); border-radius:999px; padding:4px 12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.results{padding:18px 22px; display:flex; flex-direction:column; gap:18px}
+.res{display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:start; padding:10px; border-radius:8px}
+.res .pos{font-family:var(--mono); font-size:13px; color:var(--muted); padding-top:2px}
+.res .u{font-size:13px; color:var(--serp-url)}
+.res .t{font-family:Arial, sans-serif; font-size:19px; color:var(--serp-title); line-height:1.3}
+.res .s{font-size:14px; color:var(--serp-snip); font-family:Arial, sans-serif}
+.res.hl{background:var(--bad-soft); outline:2px solid var(--bad)}
+.res.ok{background:var(--good-soft)}
+.res .flag{font-family:var(--mono); font-size:12px; margin-top:6px; color:var(--bad); font-weight:600}
+.res.ok .flag{color:var(--good)}
+
+/* Código */
+.codes{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px}
+.win{background:var(--code-bg); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; min-width:0; border:1px solid #1f2a44}
+.win .bar{background:#161f33; border-color:#1f2a44; color:var(--code-dim)}
+.win .bar .addr{background:#0b111e; border-color:#1f2a44; color:#aab6cf}
+.win-head{display:flex; justify-content:space-between; align-items:center; padding:12px 14px 0; gap:8px}
+.win-head strong{font-family:var(--display); color:#fff; font-size:16px}
+.pill{font-family:var(--mono); font-size:11px; padding:3px 9px; border-radius:999px; font-weight:600; white-space:nowrap}
+.pill.b{background:#4a1220; color:#ff8a99} .pill.g{background:#123b26; color:#7fe0a8}
+pre{margin:0; padding:12px 14px 16px; font-family:var(--mono); font-size:12.2px; line-height:1.6; color:var(--code-fg); white-space:pre-wrap; word-break:break-word; overflow-x:auto}
+pre .d{color:var(--code-dim)} pre .tg{color:var(--code-tag)} pre .at{color:var(--code-attr)} pre .st{color:var(--code-str)}
+pre .x{background:rgba(255,90,110,.18); outline:1px dashed #ff5a6e; border-radius:2px}
+pre .y{background:rgba(79,209,139,.16); border-radius:2px}
+.win .foot{margin-top:auto; padding:10px 14px; border-top:1px solid #1f2a44; font-family:var(--mono); font-size:11.5px; color:var(--code-dim)}
+
+/* Tabela */
+.tbl{overflow-x:auto; background:var(--surface); border:1px solid var(--line); border-radius:12px}
+table{border-collapse:collapse; width:100%; min-width:640px; font-variant-numeric:tabular-nums}
+th,td{padding:13px 16px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600}
+th.rm{color:var(--bad)}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+td.n{font-family:var(--mono); font-size:15px}
+.sym{font-family:var(--mono); font-weight:600}
+
+/* Achados pós-render */
+.finds{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px}
+.find{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--bad); border-radius:8px; padding:16px 18px; display:flex; flex-direction:column; gap:8px; min-width:0}
+.find.warn{border-left-color:#d58a00}
+.find h3{margin:0; font-family:var(--display); font-size:18px}
+.find code{font-family:var(--mono); font-size:13px; background:var(--bg); padding:2px 6px; border-radius:4px; word-break:break-all}
+
+/* Fluxo */
+.flow{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px}
+.lane{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:12px; min-width:0}
+.lane h3{margin:0; font-family:var(--display); font-size:18px}
+.steps{display:flex; flex-wrap:wrap; align-items:center; gap:8px}
+.step{font-family:var(--mono); font-size:12.5px; padding:8px 10px; border-radius:6px; background:var(--bg); border:1px solid var(--line)}
+.step.ok{background:var(--good-soft); border-color:transparent; color:var(--good); font-weight:600}
+.step.ko{background:var(--bad-soft); border-color:transparent; color:var(--bad); font-weight:600}
+.arr{color:var(--muted); font-family:var(--mono)}
+
+/* Plano */
+.plan{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; counter-reset:p}
+.plan li{counter-increment:p; display:grid; grid-template-columns:48px 1fr auto; gap:14px; align-items:start; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+.plan li::before{content:counter(p); font-family:var(--display); font-weight:800; font-size:26px; color:var(--navy); line-height:1}
+.plan strong{display:block; font-family:var(--display); font-size:17px}
+.plan span.d{color:var(--muted); font-size:15px}
+.tag{font-family:var(--mono); font-size:11px; padding:3px 9px; border-radius:999px; white-space:nowrap; align-self:center}
+.tag.hi{background:var(--bad-soft); color:var(--bad)} .tag.md{background:var(--bg); color:var(--muted); border:1px solid var(--line)}
+
+.checks{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px}
+.checks div{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px; display:flex; flex-direction:column; gap:6px}
+.checks h3{margin:0; font-family:var(--display); font-size:17px}
+.checks p{font-size:15px; color:var(--muted)}
+
+.sites{display:flex; flex-direction:column; gap:12px}
+.serp.mini .res{grid-template-columns:1fr; margin:10px; padding:10px 12px}
+.serp.mini .bar .addr{font-size:12px}
+.cnt-r{font-family:var(--mono); font-size:11.5px; white-space:nowrap}
+.res .s.empty{font-family:var(--mono); font-size:12px; color:var(--bad); border:1px dashed var(--bad); border-radius:4px; padding:6px 8px; margin-top:4px; opacity:.85}
+@media (max-width:600px){.cnt-r{display:none}}
+.nav{position:fixed; right:max(16px, calc(env(safe-area-inset-right,0px) + 12px)); bottom:calc(env(safe-area-inset-bottom,0px) + 14px); display:flex; gap:6px; z-index:5}
+.nav button{font:600 13px var(--mono); width:38px; height:38px; border-radius:8px; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer}
+.nav button:focus-visible{outline:2px solid var(--navy); outline-offset:2px}
+.nav .cnt{font:12px var(--mono); color:var(--muted); align-self:center; padding:0 6px; background:var(--surface); border:1px solid var(--line); border-radius:8px; height:38px; display:flex; align-items:center}
+
+@media (max-width:900px){
+  .codes,.finds,.flow,.checks,.verdict{grid-template-columns:minmax(0,1fr)}
+  .slide{min-height:auto}
+  .plan li{grid-template-columns:36px 1fr} .plan .tag{grid-column:2; justify-self:start}
+}
+</style>
+</head>
+<body>
+<!-- 1 · CAPA -->
+<section class="slide cover" id="capa">
+  <div class="wrap">
+    <div class="eyebrow"><b>LabMídia</b> · Diagnóstico técnico de SEO</div>
+    <h1>Por que a RE/MAX caiu em <span>“casas para alugar Botucatu”</span></h1>
+    <p class="lead">O Google recebe da RE/MAX uma página em branco. Os concorrentes entregam título, descrição e centenas de imóveis já prontos no HTML. Esta apresentação mostra a diferença com o código real de cada site.</p>
+    <div class="verdict">
+      <div><span class="k">Posição antes</span><span class="v">Top 3</span></div>
+      <div><span class="k">Posição agora</span><span class="v bad">Top 10</span></div>
+      <div><span class="k">Causa principal</span><span class="v">Página renderizada só por JavaScript</span></div>
+    </div>
+    <div class="meta-row"><span>Página analisada <strong>remax.com.br/casas-para-alugar-botucatu/</strong></span><span>Capturas <strong>22/10/2026</strong></span><span>Comparação <strong>Viva Real · OLX</strong></span></div>
+  </div>
+</section>
+
+<!-- 2 · SINTOMA NA SERP -->
+<section class="slide" id="sintoma">
+  <div class="wrap">
+    <div class="eyebrow"><b>01</b> · O sintoma no Google</div>
+    <h2>O Google reescreveu o título da RE/MAX e não mostra descrição</h2>
+    <p class="lead">Na mesma busca, a OLX aparece com o título e a descrição que ela mesma definiu. A RE/MAX aparece com um título montado pelo Google e nenhum texto abaixo.</p>
+    <div class="serp">
+      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">google.com/search?q=casas+para+alugar+botucatu</span></div>
+      <div class="results">
+        <div class="res ok">
+          <span class="pos">#3</span>
+          <div>
+            <div class="u">www.olx.com.br › imoveis › aluguel › casas › botucatu</div>
+            <div class="t">Casas para alugar - Botucatu, SP</div>
+            <div class="s">As casas para alugar em Botucatu, SP que são a sua cara estão na OLX. Descubra milhares de ofertas com preços imperdíveis. Confira já!</div>
+            <div class="flag">✓ Título e descrição vêm do próprio site</div>
+          </div>
+        </div>
+        <div class="res hl">
+          <span class="pos">#4</span>
+          <div>
+            <div class="u">https://www.remax.com.br › casas-para-alugar-botucatu</div>
+            <div class="t">Aluguel de casas em botucatu Remax</div>
+            <div class="s">&nbsp;</div>
+            <div class="flag">✕ Título reescrito pelo Google · descrição vazia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">Resultados lidos na busca do Google em 22/10/2026 (pt-BR). A posição exata varia por localização e histórico de quem pesquisa; o título e a ausência de descrição são o ponto aqui. O título que a RE/MAX define via JavaScript é “Casas para alugar em botucatu - RE/MAX”, e não foi esse que o Google usou.</p>
+  </div>
+</section>
+
+<!-- 3 · CÓDIGO-FONTE -->
+<section class="slide" id="codigo">
+  <div class="wrap">
+    <div class="eyebrow"><b>02</b> · O que o robô do Google recebe</div>
+    <h2>Código-fonte das três páginas, lado a lado</h2>
+    <p class="lead">Este é o HTML que o servidor entrega no primeiro acesso, o mesmo que aparece em “Exibir código-fonte” (Ctrl+U). É isso que o Google lê antes de qualquer JavaScript rodar.</p>
+    <div class="codes">
+      <div class="win">
+        <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">view-source:remax.com.br/casas-para-alugar-botucatu/</span></div>
+        <div class="win-head"><strong>RE/MAX</strong><span class="pill b">HTML vazio</span></div>
+<pre><span class="d">&lt;!doctype html&gt;</span>
+<span class="tg">&lt;html</span> <span class="at">translate</span>=<span class="st">"no"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;head&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name</span>=<span class="st">"viewport"</span> …<span class="tg">&gt;</span>
+  <span class="tg">&lt;link</span> <span class="at">href</span>=<span class="st">"…bootstrap.min.css"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;link</span> <span class="at">href</span>=<span class="st">"…swiper-bundle.min.css"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;script</span> <span class="at">src</span>=<span class="st">"…/static/js/main~….js"</span><span class="tg">&gt;</span>
+  <span class="d">… 23 scripts no total …</span>
+  <span class="x">&lt;!-- sem &lt;title&gt; --&gt;</span>
+  <span class="x">&lt;!-- sem meta description --&gt;</span>
+<span class="tg">&lt;/head&gt;</span>
+<span class="tg">&lt;body&gt;</span>
+  <span class="x"><span class="tg">&lt;div</span> <span class="at">id</span>=<span class="st">"root"</span><span class="tg">&gt;&lt;/div&gt;</span></span>
+  <span class="d">&lt;!-- nenhum imóvel, nenhum texto --&gt;</span>
+<span class="tg">&lt;/body&gt;</span></pre>
+        <div class="foot">3,1 KB · 0 preços · 0 caracteres de texto</div>
+      </div>
+
+      <div class="win">
+        <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">view-source:vivareal.com.br/aluguel/sp/botucatu/</span></div>
+        <div class="win-head"><strong>Viva Real</strong><span class="pill g">HTML completo</span></div>
+<pre><span class="y"><span class="tg">&lt;title&gt;</span>Imóveis para alugar em Botucatu, SP - Viva Real<span class="tg">&lt;/title&gt;</span></span>
+<span class="y"><span class="tg">&lt;meta</span> <span class="at">name</span>=<span class="st">"description"</span>
+  <span class="at">content</span>=<span class="st">"Mais de 582 imóveis para alugar em Botucatu, São Paulo. Acesse as melhores ofertas…"</span><span class="tg">&gt;</span></span>
+<span class="tg">&lt;link</span> <span class="at">rel</span>=<span class="st">"canonical"</span>
+  <span class="at">href</span>=<span class="st">"…/aluguel/sp/botucatu/"</span><span class="tg">&gt;</span>
+<span class="d">…</span>
+<span class="y"><span class="tg">&lt;h1</span> <span class="at">data-cy</span>=<span class="st">"rp-searchTitle-txt"</span><span class="tg">&gt;</span>
+  582 Imóveis para alugar em Botucatu - SP
+<span class="tg">&lt;/h1&gt;</span></span>
+<span class="d">…</span>
+<span class="y">Casa para alugar com 100 m², 2 quartos,
+1 banheiro, 1 vaga em R$ 1.200/mês
+Parque Residencial Serra Negra, Botucatu</span></pre>
+        <div class="foot">1,17 MB · 53 preços · 19,6 mil caracteres</div>
+      </div>
+
+      <div class="win">
+        <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">view-source:olx.com.br/imoveis/aluguel/casas/…/botucatu</span></div>
+        <div class="win-head"><strong>OLX</strong><span class="pill g">HTML completo</span></div>
+<pre><span class="y"><span class="tg">&lt;title&gt;</span>Casas para alugar - Botucatu, SP | OLX<span class="tg">&lt;/title&gt;</span></span>
+<span class="y"><span class="tg">&lt;meta</span> <span class="at">name</span>=<span class="st">"description"</span>
+  <span class="at">content</span>=<span class="st">"As casas para alugar em Botucatu, SP que são a sua cara estão na OLX…"</span><span class="tg">&gt;</span></span>
+<span class="tg">&lt;link</span> <span class="at">rel</span>=<span class="st">"canonical"</span>
+  <span class="at">href</span>=<span class="st">"…/regiao-de-bauru-e-marilia/botucatu"</span><span class="tg">&gt;</span>
+<span class="d">…</span>
+<span class="y"><span class="tg">&lt;h1&gt;</span>Casas para alugar - Botucatu, SP<span class="tg">&lt;/h1&gt;</span></span>
+<span class="d">…</span>
+<span class="y">Imóvel para locação no Jardim Regina
+Botucatu/SP 65m² · R$ 2.500
+Botucatu, Vila Cidade Jardim</span></pre>
+        <div class="foot">1,0 MB · 80 preços · 16,7 mil caracteres</div>
+      </div>
+    </div>
+    <p class="note">Trechos reais do HTML capturado em 22/10/2026, resumidos com “…” onde havia scripts e estilos. Vermelho tracejado: o que falta na RE/MAX. Verde: o que os concorrentes entregam de imediato.</p>
+  </div>
+</section>
+
+<!-- 4 · TABELA -->
+<section class="slide" id="comparativo">
+  <div class="wrap">
+    <div class="eyebrow"><b>03</b> · Comparativo</div>
+    <h2>O que cada página entrega no HTML inicial</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Item</th><th class="rm">RE/MAX</th><th>Viva Real</th><th>OLX</th></tr></thead>
+        <tbody>
+          <tr><td>Tamanho do HTML</td><td class="n bad">3,1 KB</td><td class="n">1,17 MB</td><td class="n">1,0 MB</td></tr>
+          <tr><td>&lt;title&gt;</td><td class="sym bad">✕ ausente</td><td class="sym good">✓</td><td class="sym good">✓</td></tr>
+          <tr><td>Meta description</td><td class="sym bad">✕ ausente</td><td class="sym good">✓</td><td class="sym good">✓</td></tr>
+          <tr><td>H1</td><td class="sym bad">✕ ausente</td><td class="sym good">✓ “582 Imóveis para alugar em Botucatu - SP”</td><td class="sym good">✓ “Casas para alugar - Botucatu, SP”</td></tr>
+          <tr><td>Canonical</td><td class="sym bad">✕ só via JS</td><td class="sym good">✓</td><td class="sym good">✓</td></tr>
+          <tr><td>Preços de imóveis no HTML</td><td class="n bad">0</td><td class="n">53</td><td class="n">80</td></tr>
+          <tr><td>Texto legível no HTML</td><td class="n bad">0 caracteres</td><td class="n">19,6 mil</td><td class="n">16,7 mil</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lead">Para o robô, Viva Real e OLX são páginas ricas sobre aluguel em Botucatu. A RE/MAX é uma caixa vazia que só ganha conteúdo se o Google executar o JavaScript, e isso não é garantido.</p>
+  </div>
+</section>
+
+<!-- 5 · DEPOIS DO JS -->
+<section class="slide" id="renderizado">
+  <div class="wrap">
+    <div class="eyebrow"><b>04</b> · Mesmo depois do JavaScript</div>
+    <h2>Quando a página da RE/MAX termina de carregar, ainda há problemas</h2>
+    <p class="lead">Abrimos a página num navegador real e esperamos tudo carregar. O visitante vê os imóveis, mas a parte que o Google usa para ranquear continua fraca.</p>
+    <div class="finds">
+      <div class="find">
+        <h3>Meta description não existe</h3>
+        <p>Nem no HTML inicial nem depois do JavaScript. Por isso o Google mostra o resultado sem texto abaixo do título.</p>
+      </div>
+      <div class="find">
+        <h3>H1 sem a palavra-chave</h3>
+        <p><code>São Paulo, Botucatu Residencial Imobiliária e Casa Alugar</code></p>
+        <p>Frase gerada a partir dos filtros. Não contém “casas para alugar em Botucatu”.</p>
+      </div>
+      <div class="find warn">
+        <h3>URL muda depois que carrega</h3>
+        <p><code>/casas-para-alugar-botucatu/?Country=Brasil&amp;City=6581935&amp;…&amp;MacroPropertyTypeUIDs=3237</code></p>
+        <p>A página reescreve o endereço com parâmetros de filtro, o que gera variações da mesma página.</p>
+      </div>
+      <div class="find warn">
+        <h3>Barra final inconsistente</h3>
+        <p>O link usado é <code>…botucatu/</code> e a canonical aponta para <code>…botucatu</code> (sem barra). Cada acesso passa por um sinal divergente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · POR QUE CAI -->
+<section class="slide" id="porque">
+  <div class="wrap">
+    <div class="eyebrow"><b>05</b> · Por que isso derruba o ranking</div>
+    <h2>O Google lê o HTML na hora e o JavaScript só quando sobra recurso</h2>
+    <div class="flow">
+      <div class="lane">
+        <h3>Viva Real e OLX</h3>
+        <div class="steps"><span class="step">Robô visita</span><span class="arr">→</span><span class="step ok">HTML completo</span><span class="arr">→</span><span class="step ok">Indexa título, descrição e imóveis</span></div>
+        <p class="note">Tudo é entendido no primeiro contato. Nada depende de renderização.</p>
+      </div>
+      <div class="lane">
+        <h3>RE/MAX</h3>
+        <div class="steps"><span class="step">Robô visita</span><span class="arr">→</span><span class="step ko">HTML vazio</span><span class="arr">→</span><span class="step">Fila de renderização</span><span class="arr">→</span><span class="step ko">Pode atrasar, falhar ou sair parcial</span></div>
+        <p class="note">Enquanto não renderiza, a página não tem título nem conteúdo. O Google então inventa o título e perde confiança na relevância da página.</p>
+      </div>
+    </div>
+    <div class="lane">
+      <h3>E nas buscas com IA</h3>
+      <p>Robôs de IA como os do ChatGPT, Claude e Perplexity em geral não executam JavaScript. Para eles a página da RE/MAX está vazia, então ela fica fora das respostas geradas sobre imóveis em Botucatu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · PLANO -->
+<section class="slide" id="plano">
+  <div class="wrap">
+    <div class="eyebrow"><b>06</b> · Plano de correção</div>
+    <h2>O que corrigir, em ordem de impacto</h2>
+    <ol class="plan">
+      <li><div><strong>Entregar a página pronta no servidor</strong><span class="d">Renderização no servidor (SSR) ou páginas estáticas para as URLs de cidade e tipo de imóvel. Título, descrição, canonical, H1, texto e lista de imóveis com links precisam vir no HTML inicial.</span></div><span class="tag hi">Crítico</span></li>
+      <li><div><strong>Paliativo enquanto o SSR não sai</strong><span class="d">Pré-renderização para robôs (serviço tipo Prerender), entregando ao Google uma versão HTML pronta da mesma página.</span></div><span class="tag hi">Crítico</span></li>
+      <li><div><strong>Criar meta descriptions por página</strong><span class="d">Ex.: “Casas para alugar em Botucatu, SP: veja imóveis RE/MAX com fotos, preços e bairros. Agende sua visita.”</span></div><span class="tag hi">Alto</span></li>
+      <li><div><strong>Reescrever o H1 com a palavra-chave</strong><span class="d">Ex.: “Casas para alugar em Botucatu, SP”, no lugar da frase montada pelos filtros.</span></div><span class="tag md">Médio</span></li>
+      <li><div><strong>Padronizar URL e canonical</strong><span class="d">Escolher com ou sem barra final, aplicar redirect 301 para a outra e alinhar canonical, links internos e sitemap. Evitar reescrever a URL com parâmetros ao carregar.</span></div><span class="tag md">Médio</span></li>
+      <li><div><strong>Reindexar e acompanhar</strong><span class="d">Solicitar indexação das páginas principais no Search Console e monitorar posição, CTR e impressões por 4 a 8 semanas.</span></div><span class="tag md">Contínuo</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 8 · VALIDAÇÃO -->
+<section class="slide" id="validacao">
+  <div class="wrap">
+    <div class="eyebrow"><b>07</b> · Como validar a correção</div>
+    <h2>Três testes que qualquer pessoa da equipe consegue fazer</h2>
+    <div class="checks">
+      <div><h3>Ctrl+U na página</h3><p>O código-fonte deve mostrar &lt;title&gt;, meta description, H1 e os imóveis em texto, sem depender do Inspecionar (F12).</p></div>
+      <div><h3>Inspeção de URL</h3><p>No Search Console, “Testar URL ativa” e conferir o HTML renderizado, o print e se a canonical escolhida pelo Google é a mesma do site.</p></div>
+      <div><h3>Resultado no Google</h3><p>Em alguns dias após reindexar, o resultado deve exibir o título e a descrição definidos pela RE/MAX, e não um texto montado pelo Google.</p></div>
+    </div>
+    <p class="note">LabMídia · Diagnóstico capturado em 22/10/2026. Dados de HTML obtidos acessando cada página diretamente; resultados de busca podem variar por região.</p>
+  </div>
+</section>
+
+<!-- 9 · BUSCA SITE: -->
+<section class="slide" id="site">
+  <div class="wrap">
+    <div class="eyebrow"><b>08</b> · Prova no próprio Google</div>
+    <h2>Pesquisando cada página com “site:”, só a RE/MAX aparece em branco</h2>
+    <p class="lead">O comando <code style="font-family:var(--mono)">site:</code> mostra como o Google guardou a página no índice. Viva Real e OLX aparecem com título e descrição. A RE/MAX aparece só com um título reescrito e nada embaixo.</p>
+    <div class="sites">
+      <div class="serp mini">
+        <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">site:https://www.vivareal.com.br/aluguel/sp/botucatu/</span><span class="cnt-r">~951 resultados</span></div>
+        <div class="res ok">
+          <div>
+            <div class="u">Viva Real · https://www.vivareal.com.br › Aluguel › SP</div>
+            <div class="t">Imóveis para alugar em Botucatu, SP</div>
+            <div class="s">Sua busca ficou ainda melhor! Evoluímos a forma como mostramos o resultado da sua busca para que tenha uma experiência mais fácil e eficiente…</div>
+            <div class="flag">✓ Google leu título e texto da página</div>
+          </div>
+        </div>
+      </div>
+      <div class="serp mini">
+        <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">site:https://www.olx.com.br/imoveis/aluguel/casas/estado-sp/regiao-de-bauru-e-marilia/botucatu</span><span class="cnt-r">~117 resultados</span></div>
+        <div class="res ok">
+          <div>
+            <div class="u">OLX · https://www.olx.com.br › regiao-de-bauru-e-marilia › b…</div>
+            <div class="t">Casas para alugar - Botucatu, SP</div>
+            <div class="s">As casas para alugar em Botucatu, SP que são a sua cara estão na OLX. Descubra milhares de ofertas com preços imperdíveis. Confira já!</div>
+            <div class="s"><b>R$ 800,00 a R$ 16.000,00</b></div>
+            <div class="flag">✓ Google leu título, descrição e até a faixa de preços</div>
+          </div>
+        </div>
+      </div>
+      <div class="serp mini">
+        <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">site:https://www.remax.com.br/casas-para-alugar-botucatu/</span><span class="cnt-r bad">~1 resultado</span></div>
+        <div class="res hl">
+          <div>
+            <div class="u">REMAX · https://www.remax.com.br › casas-para-alugar-botucatu</div>
+            <div class="t">Aluguel de casas em botucatu Remax</div>
+            <div class="s empty">sem descrição</div>
+            <div class="flag">✕ Google não leu o conteúdo: título inventado e descrição vazia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">Buscas feitas no Google em 22/10/2026 (pt-BR). Teste que o cliente pode repetir: colar cada linha “site:” acima na busca do Google.</p>
+  </div>
+</section>
+
+<nav class="nav" aria-label="Navegação dos slides">
+  <button id="prev" type="button" aria-label="Slide anterior">↑</button>
+  <span class="cnt" id="cnt">1 / 9</span>
+  <button id="next" type="button" aria-label="Próximo slide">↓</button>
+</nav>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const cnt=document.getElementById('cnt');
+  function cur(){let best=0,min=Infinity;slides.forEach((s,i)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<min){min=d;best=i}});return best}
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({block:'start'});}
+  function upd(){cnt.textContent=(cur()+1)+' / '+slides.length}
+  document.getElementById('prev').addEventListener('click',()=>go(cur()-1));
+  document.getElementById('next').addEventListener('click',()=>go(cur()+1));
+  document.addEventListener('keydown',e=>{
+    if(['ArrowDown','PageDown','ArrowRight',' '].includes(e.key)){e.preventDefault();go(cur()+1)}
+    if(['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){e.preventDefault();go(cur()-1)}
+  });
+  window.addEventListener('scroll',upd,{passive:true}); upd();
+})();
+</script>
+</body>
+</html>
